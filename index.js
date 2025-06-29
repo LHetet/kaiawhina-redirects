@@ -10,6 +10,7 @@ app.get("/:ref", (req, res) => {
   const match = redirects.kaiawhina.find(k =>
     k.name.toLowerCase().replace(/\s+/g, '') === ref
   );
+console.log(ref, match);
 
   if (match) {
     return res.redirect(301, match.referral);
