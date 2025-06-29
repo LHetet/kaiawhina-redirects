@@ -1,10 +1,19 @@
 const express = require("express");
+const redirects = require("./public/kaiawhina-redirects.json");
+
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// Serve files from the "public" folder
-app.use(express.static("public"));
+app.get("/:ref", (req, res) => {
+  const ref = req.params.ref.toLowerCase();
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  if (redirects[ref]) {
+    return res.redirect(301, redirects[ref]);
+  } else {
+    return res.status(404).send("Not found");
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Redirect server running on port ${PORT}`);
 });
