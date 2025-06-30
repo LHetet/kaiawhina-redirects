@@ -1,19 +1,21 @@
 const express = require("express");
-const redirects = require("./public/kaiawhina-redirects.json");
+const redirectMap = require("./kaiawhina-redirects.json");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.get("/:ref", (req, res) => {
-  const ref = req.params.ref.toLowerCase();
+app.get("/:referralCode", (req, res) => {
+  const referralCode = req.params.referralCode;
+  const redirectUrl = redirectMap[referralCode];
 
-  if (redirects[ref]) {
-    return res.redirect(301, redirects[ref]);
+  if (redirectUrl) {
+    console.log(`Redirecting ${referralCode} → ${redirectUrl}`);
+    res.redirect(302, `${redirectUrl}?ref=${referralCode}`);
   } else {
-    return res.status(404).send("Not found");
+    res.status(404).send("Referral not found");
   }
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Redirect server running on port ${PORT}`);
 });
