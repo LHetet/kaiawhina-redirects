@@ -14,8 +14,3 @@ app.get("/:referralCode", (req, res) => {
     res.status(404).send("Referral not found");
   }
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Redirect server running on port ${PORT}`);
-});
