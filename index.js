@@ -6,10 +6,10 @@ const app = express();
 
 // ✅ Load Kaiawhina and Product Redirects
 const kaiawhinaRedirects = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "public", "kaiawhina-redirects.json"), "utf8")
+  fs.readFileSync(path.join(__dirname, "kaiawhina-redirects", "public", "kaiawhina-redirects.json"), "utf8")
 );
 const productRedirects = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "public", "product-redirects.json"), "utf8")
+  fs.readFileSync(path.join(__dirname, "kaiawhina-redirects", "public", "product-redirects.json"), "utf8")
 );
 
 // ✅ Logging unmatched slugs
